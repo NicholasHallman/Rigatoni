@@ -64,6 +64,15 @@ export class RigatoniVisualNode extends LitElement {
             align-items: center;
         }
 
+        .inline-start {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .inline-start > input {
+            margin-top: 15px;
+        }
+
         .inline.end {
             justify-content: flex-end;
         }
@@ -117,20 +126,27 @@ export class RigatoniVisualNode extends LitElement {
                 let value = this.type[k];
                 const vType = this.type.constructor.inputs[k].type;
                 if (vType === Object) value = JSON.stringify(value);
-                return html`
-                <div class="inline">
-                    <div 
-                        class="bubble ${v.__connectedTo ? 'connected' : ''}" 
-                        connection-name="input-${k}"
-                        @mouseup=${this.#handleConnectionEnd}
-                    ></div>
-                    <p class="input">${k}</p>
-                    <input 
+
+                const control = this.type.constructor.inputs[k].view 
+                    ? this.type.constructor.inputs[k].view.bind(this.type)()
+                    : html`<input 
                         @input=${this.#handleInputChange} 
                         name=${`input-${k}`} 
                         type="text" 
                         .value=${this.type[k] === undefined ? '' : value}>
-                    </input>
+                    </input>`
+
+                return html`
+                <div class="inline-start">
+                    <div class="inline">
+                        <div 
+                            class="bubble ${v.__connectedTo ? 'connected' : ''}" 
+                            connection-name="input-${k}"
+                            @mouseup=${this.#handleConnectionEnd}
+                        ></div>
+                        <p class="input">${k}</p>
+                    </div>
+                    ${control}
                 </div>
                 `
             }
