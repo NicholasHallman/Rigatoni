@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Coding Example</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script type="module">
+        import { LitElement, html } from 'lit';
+        import '../../src/rigatoni.js';
+        import { Dataframe } from './nodes/Dataframe.js';
+        import { Select } from './nodes/Select.js';
+        import { ConsoleLog } from '../basic-coding/nodes/log.js';
+
+        class BasicETLRigatoni extends LitElement {
+
+            render() {
+                return html`
+                    <rigatoni-editor
+                        .library = ${[
+                            Dataframe,
+                            Select,
+                            ConsoleLog,
+                        ]}
+                    ></rigatoni-editor>
+                `;
+            }
+        }
+
+        customElements.define('rigatoni-etl-demo', BasicETLRigatoni);
+    </script>
+</head>
+<body>
+    <rigatoni-etl-demo></rigatoni-etl-demo>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "rigatoni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "web-dev-server --node-resolve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^3.3.1"
+  },
+  "volta": {
+    "node": "25.0.0"
+  }
+}
